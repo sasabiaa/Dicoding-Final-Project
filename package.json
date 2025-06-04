@@ -1,0 +1,41 @@
+{
+  "name": "capstone-sensor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@vue/compiler-sfc": "^3.5.16",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "vue-loader": "^16.8.3",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "axios": "^1.9.0",
+    "capstone-sensor": "file:",
+    "chart.js": "^4.4.9",
+    "express": "^5.1.0",
+    "multer": "^2.0.1",
+    "pg": "^8.16.0",
+    "vue": "^3.5.16",
+    "vue-chartjs": "^5.3.2",
+    "vue-router": "^4.5.1",
+    "vuex": "^4.1.0"
+  }
+}
