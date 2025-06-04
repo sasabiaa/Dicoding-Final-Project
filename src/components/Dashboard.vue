@@ -127,6 +127,7 @@ header {
 .user-greeting h4 {
   font-size: 16px;
   margin-left: 20px;
+  line-height: 0;
 }
 
 .user-greeting p {
