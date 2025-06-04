@@ -8,6 +8,7 @@
           <p>Selamat datang di Dashboard, mari cek tanaman anda!</p>
         </div>
         <div class="status-info">
+          <!-- Optional status info can be added here -->
         </div>
       </header>
 
@@ -18,6 +19,7 @@
 
       <!-- Data Sensor and Disease Detection Containers -->
       <div class="data-container">
+        <!-- Data Sensor -->
         <div class="data-sensor">
           <h3>Data Sensor</h3>
           <div class="sensor-items">
@@ -52,6 +54,7 @@
 
 <script>
 import Sidebar from './Sidebar.vue';
+import io from 'socket.io-client';
 
 export default {
   name: 'Dashboard',
@@ -64,27 +67,27 @@ export default {
       sensors: [
         {
           name: "Intensitas Cahaya",
-          value: 22,
+          value: 'Loading...',
           icon: "fas fa-sun",
-          timestamp: "12/08/2020 - 9:41"
+          timestamp: "Loading..."
         },
         {
           name: "Suhu",
-          value: 22,
+          value: 'Loading...',
           icon: "fas fa-thermometer-half",
-          timestamp: "12/08/2020 - 9:41"
+          timestamp: "Loading..."
         },
         {
           name: "Kelembapan Udara",
-          value: 22,
+          value: 'Loading...',
           icon: "fas fa-cloud-sun",
-          timestamp: "12/08/2020 - 9:41"
+          timestamp: "Loading..."
         },
         {
           name: "Kelembapan Tanah",
-          value: 22,
+          value: 'Loading...',
           icon: "fas fa-water",
-          timestamp: "12/08/2020 - 9:41"
+          timestamp: "Loading..."
         }
       ],
       diseases: [
@@ -98,6 +101,31 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    // Connect to the Socket.io server
+    const socket = io(); // Connect to the backend server
+
+    // Listen for real-time updates from the backend and update Vue's reactive data
+    socket.on('SMART-FARM/hum', (data) => {
+      this.sensors[0].value = data; // Update the value for Humidity sensor
+      this.sensors[0].timestamp = new Date().toLocaleString(); // Set timestamp
+    });
+
+    socket.on('SMART-FARM/temp', (data) => {
+      this.sensors[1].value = data; // Update the value for Temperature sensor
+      this.sensors[1].timestamp = new Date().toLocaleString(); // Set timestamp
+    });
+
+    socket.on('SMART-FARM/kbtn', (data) => {
+      this.sensors[2].value = data; // Update the value for Soil Moisture sensor
+      this.sensors[2].timestamp = new Date().toLocaleString(); // Set timestamp
+    });
+
+    socket.on('SMART-FARM/chy', (data) => {
+      this.sensors[3].value = data; // Update the value for Light Intensity sensor
+      this.sensors[3].timestamp = new Date().toLocaleString(); // Set timestamp
+    });
   },
 };
 </script>
@@ -115,24 +143,25 @@ export default {
 }
 
 header {
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(135deg, #7ABA78, #F3CA52);
-  padding: 8px;
+  padding: 10px 20px;
   border-radius: 50px;
 }
 
 .user-greeting h4 {
-  font-size: 16px;
+  font-size: 18px;
   margin-left: 20px;
   line-height: 0;
 }
 
 .user-greeting p {
-  font-size: 12px;
+  font-size: 14px;
   margin-left: 20px;
+  line-height: 0;
 }
 
 .status-info {
